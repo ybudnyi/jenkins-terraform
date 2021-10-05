@@ -18,27 +18,6 @@ resource "google_compute_instance" "web" {
     subnetwork = google_compute_subnetwork.public.id
     access_config {}
   }
-  metadata = {
-    ssh-keys = "yurii:${file("~/.ssh/id_rsa.pub")}"
-  }
-
-  connection {
-    type     = "ssh"
-    user     = "yurii"
-    private_key = "${file("~/.ssh/id_rsa")}"
-    host = self.network_interface.0.access_config.0.nat_ip
-    agent = false
-  }
-  provisioner "remote-exec" {
-    inline = [
-      "sudo yum install epel-release -y",
-      "sudo yum install nginx -y",
-      "sudo systemctl enable nginx --now",
-      "sudo firewall-cmd --zone=public --permanent --add-service=http",
-      "sudo firewall-cmd --reload"
-    ]
-  }
-
 }
 /*
 resource "null_resource" "configure-webserver" {
