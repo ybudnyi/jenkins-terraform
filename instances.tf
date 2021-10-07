@@ -1,5 +1,5 @@
 variable "web_count" {
-  default = 1
+  default = 2
   
 }
 
