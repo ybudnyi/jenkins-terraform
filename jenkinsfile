@@ -26,10 +26,21 @@ pipeline {
               sh 'terraform init -reconfigure'
           }
       }
-      stage('Terraform apply') {
+      stage('Terraform plan') {
+          when {
+              branch 'plan'
+          }
           steps {
               sh 'terraform plan'
               echo 'planning'
+          }
+      }
+      stage('Terraform apply') {
+          when {
+              branch 'main'
+          }
+          steps {
+              sh 'terraform apply -auto-approve'
           }
       }
     }
