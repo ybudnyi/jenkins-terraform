@@ -19,23 +19,3 @@ resource "google_compute_instance" "web" {
     access_config {}
   }
 }
-/*
-resource "null_resource" "configure-webserver" {
-  count = var.web_count
-  connection {
-    type     = "ssh"
-    user     = "yurii"
-    private_key = "${file("~/.ssh/id_rsa.pub")}"
-    agent = true
-    host = "${google_compute_instance.default.network_interface.0.access_config.0.nat_ip}"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo yum install nano -y",
-      "sudo touch works.txt"
-    ]
-    
-  }
-}
-*/
