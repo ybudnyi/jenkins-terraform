@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Download code') {
         steps {
-            git branch: 'main', url: 'https://github.com/ybudnyi/jenkins-terraform.git'
+            git branch: 'main', url: 'git@github.com:ybudnyi/jenkins-terraform.git'
           }
       }
     stage('Checkout') {
@@ -31,6 +31,7 @@ pipeline {
       stage('Terraform apply') {
           steps {
               sh 'terraform apply -auto-approve'
+              sh 'terraform destroy -auto-approve'
           }
       }
     }
