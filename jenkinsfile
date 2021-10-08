@@ -36,6 +36,7 @@ pipeline {
               sh 'terraform plan'
               echo 'planning'
           }
+      }
       stage('Terraform apply') {
           when {
               branch 'main'
@@ -45,7 +46,6 @@ pipeline {
               sh 'terraform destroy -auto-approve'
           }
       }
-    }
   }
     post { 
         always { 
