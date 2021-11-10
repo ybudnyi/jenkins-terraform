@@ -8,7 +8,7 @@ resource "google_compute_firewall" "db" {
 
   allow {
     protocol = "tcp"
-    ports    = ["1433"]
+    ports    = ["1433", "22"]
   }
   source_ranges = ["10.0.0.0/16"]
   target_tags   = ["db"]
@@ -38,8 +38,13 @@ resource "google_compute_firewall" "bastion" {
   }
 
   allow {
+    protocol = "udp"
+    ports    = ["16839"]
+  }
+
+  allow {
     protocol = "tcp"
-    ports    = ["22"]
+    ports    = ["22", "80", "443"]
   }
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["bastion"]

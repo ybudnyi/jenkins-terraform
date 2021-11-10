@@ -8,6 +8,9 @@ resource "google_compute_instance" "database" {
       image = "db-sql"
     }
   }
+  metadata = {
+    ssh-keys = "yurii:${file("~/.ssh/id_rsa.pub")}"
+  }
   network_interface {
     subnetwork = google_compute_subnetwork.private.id
   }
